@@ -1,0 +1,21 @@
+{
+  "name": "notebook",
+  "version": "1.0.0",
+  "description": "Simple NoteBook",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "simple",
+    "note"
+  ],
+  "author": "ravuthz",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.5",
+    "express": "^4.14.0",
+    "mongojs": "^2.4.0"
+  }
+}
