@@ -1,15 +1,30 @@
 var express = require('express');
 var router = express.Router();
 var mongojs = require('mongojs');
-// var db = mongojs('mongodb://ravuthz:123123@ds145158.mlab.com:45158/ravuthz_notebook', ['notes']);
-var db = mongojs('mongodb://admin:123123@localhost:27017/admin?authSource=admin', ['notes']);
+var db = mongojs('mongodb://ravuthz:123123@ds145158.mlab.com:45158/ravuthz_notebook', ['notes']);
+// var db = mongojs('mongodb://admin:123123@localhost:27017/admin?authSource=admin', ['notes']);
+
+// var Note = require('./models/note');
+// var data = new Note();
+// data.title = 'new note with mongoose';
+// data.content = 'new note content with mongoose';
+// data.book = 'notebook';
+// data.author = 'admin';
+// data.save(function(err, note) {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log(note);
+//     }
+// });
+
 
 db.on('error', function(err) {
     console.log('database error', err)
 })
 
 db.on('connect', function() {
-    console.log('database connected')
+    console.log('database connected with mongojs')
 })
 
 // get all notes
