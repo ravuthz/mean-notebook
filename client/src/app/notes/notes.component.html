@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-sm-12">
+        <form (submit)="addNote($event)" class="well">
+            <div class="col-sm-6">
+                <input type="text" name="book" [(ngModel)]="book" placeholder="Note's book">
+            </div>
+            <div class="col-sm-6">
+                <input type="text" name="author" [(ngModel)]="author" placeholder="Note's author">
+            </div>
+            <div class="col-sm-12">
+                <input type="text" name="title" [(ngModel)]="title" placeholder="Note's title">
+            </div>
+            <div class="col-sm-12">
+                <textarea name="content" [(ngModel)]="content" placeholder="Note's content"></textarea>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row note-list">
+    <div *ngFor="let note of notes">
+        <div class="col-sm-1">
+            <input type="checkbox">
+        </div>
+        <div class="col-sm-2">
+            {{ note.book }}
+        </div>
+        <div class="col-sm-2">
+            {{ note.title }}
+        </div>
+        <div class="col-sm-2">
+            {{ note.author }}
+        </div>
+        <div class="col-sm-2">
+            <button class="btn btn-sm btn-danger">
+                DELETE
+            </button>
+        </div>
+    </div>
+</div>
