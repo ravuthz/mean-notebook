@@ -1,19 +1,73 @@
 <div class="row">
-    <div class="col-sm-12">
-        <form (submit)="addNote($event)" class="well">
-            <div class="col-sm-6">
-                <input type="text" name="book" [(ngModel)]="book" placeholder="Note's book">
+    <div class="well">
+        <form (submit)="createNote($event)" method="POST">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="book" [(ngModel)]="book" placeholder="Note's book">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="author" [(ngModel)]="author" placeholder="Note's author">
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-6">
-                <input type="text" name="author" [(ngModel)]="author" placeholder="Note's author">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="title" [(ngModel)]="title" placeholder="Note's title">
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-12">
-                <input type="text" name="title" [(ngModel)]="title" placeholder="Note's title">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <textarea class="form-control" name="content" [(ngModel)]="content" placeholder="Note's content"></textarea>
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-12">
-                <textarea name="content" [(ngModel)]="content" placeholder="Note's content"></textarea>
-            </div>
+            <button type="submit" class="btn btn-sm btn-primary">
+                {{ isModify ? 'Update The Note' : 'Create New Note' }}
+            </button>
+            <button type="button" (click)="blankNote()" class="btn btn-sm btn-default">
+                Cancel or Reset form
+            </button>
         </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <ul class="media-list">
+            <li class="media" *ngFor="let note of notes">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object" src="https://dummyimage.com/64x64/34495e/ecf0f1&text=No+Logo" alt="No Logo">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{ note.title }}</h4>
+                    <p>
+                        {{ note.content }}
+                    </p>
+                    <div>
+                        <div class="pull-left">
+                            <button (click)="modifyNote(note)" class="btn btn-sm btn-primary">
+                                MODIFY
+                            </button>
+                            <button (click)="deleteNote(note)" class="btn btn-sm btn-danger">
+                                DELETE
+                            </button>
+                        </div>
+                        <div class="pull-right text-right">
+                            In: {{ note.book }}, by {{ note.author }}
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+            </li>
+        </ul>
     </div>
 </div>
 
@@ -25,14 +79,17 @@
         <div class="col-sm-2">
             {{ note.book }}
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-5">
             {{ note.title }}
         </div>
         <div class="col-sm-2">
             {{ note.author }}
         </div>
         <div class="col-sm-2">
-            <button class="btn btn-sm btn-danger">
+            <button (click)="modifyNote(note)" class="btn btn-sm btn-primary">
+                MODIFY
+            </button>
+            <button (click)="deleteNote(note)" class="btn btn-sm btn-danger">
                 DELETE
             </button>
         </div>

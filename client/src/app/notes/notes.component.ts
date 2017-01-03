@@ -9,34 +9,145 @@ import { Note } from '../models/note';
 })
 
 export class NotesComponent implements OnInit {
-    notes: Note[];
-    book: String;
-    author: String;
-    title: String;
-    content: String;
+    notes;
+    book: string;
+    author: string;
+    title: string;
+    content: string;
 
-    constructor(private noteService: NoteService) {
-        this.blankNote();
-        noteService.get().subscribe(
-            notes => this.notes = notes,
-            error => console.log(error)
-        );
-    }
+    error: string;
+    isModify: boolean = false;
+    // showOption: boolean = false;
+
+    constructor(private noteService: NoteService) {}
 
     ngOnInit() {
+        this.blankNote();
 
+        this.noteService.get().then(
+            notes => {
+                console.log('get data:', notes);
+                this.notes = notes
+            },
+            error => console.log(error)
+        );
+
+        this.noteService.get("58626a02f36d2845d130d350").then(
+            res => {
+                console.log('get data:', res);
+            },
+            error => console.log(error)
+        );
+
+        this.noteService.one("58626a02f36d2845d130d350").then(
+            res => {
+                console.log('one data:', res);
+            },
+            error => console.log(error)
+        );
+
+        this.noteService.getNoReturnType("58626a02f36d2845d130d350").then(
+            res => {
+                console.log('one data:', JSON.parse(res['_body']));
+            },
+            error => console.log(error)
+        );
+
+        this.noteService.all().then(
+            res => {
+                console.log('all data:', res);
+            },
+            error => console.log(error)
+        );
+
+        // this.noteService.getNotes().subscribe(
+        //     res => this.notes = res,
+        //     err => console.log(err)
+        // );
     }
 
-    addNote() {
-        // event.preventDefault();
-        // console.log(this.title);
+    createNote() {
+        event.preventDefault();
+
+        var newNote = {
+            title: this.title,
+            content: this.content,
+            book: this.book,
+            author: this.author
+        };
+
+        this.noteService.create(newNote).then(
+            res => this.appendNotes(newNote),
+            err => this.error = <any>err
+        );
+
+        // this.noteService.createNote(newNote).subscribe(
+        //     res => this.appendNotes(newNote),
+        //     err => this.error = <any>err
+        // );
+    }
+
+    deleteNote(note) {
+        this.noteService.delete(note._id).then(
+            res => this.refreshNotes(note),
+            err => this.error = <any>err
+        );
+
+        // this.noteService.deleteNote(note._id).subscribe(
+        //     res => this.refreshNotes(note),
+        //     err => this.error = <any>err
+        // );
+    }
+
+    updateNote(note) {
+        this.noteService.update(note._id, note).then(
+            res => this.updateNotes(note),
+            err => this.error = <any>err
+        );
+
+        // this.noteService.updateNote(note._id, note).subscribe(
+        //     res => this.updateNotes(note),
+        //     err => this.error = <any>err
+        // );
+        this.isModify = false;
+    }
+
+    modifyNote(note) {
+        this.title = note.title;
+        this.content = note.content;
+        this.book = note.book;
+        this.author = note.author;
+        this.isModify = true;
     }
 
     blankNote() {
         this.book = 'notebook';
-        this.author = '1';
-        this.title = '';
-        this.content = '';
+        this.author = 'ravuthz';
+        this.title = 'note';
+        this.content = 'note';
+        this.isModify = false;
+    }
+
+    appendNotes(note) {
+        this.notes.push(note);
+        this.blankNote();
+    }
+
+    updateNotes(note) {
+        for  (let i=0; i<this.notes.length; i++) {
+            if (this.notes[i]._id == note._id) {
+                this.notes[i] = note;
+            }
+        }
+        this.blankNote();
+    }
+
+    refreshNotes(note) {
+        for (let i=0; i<this.notes.length; i++) {
+            if (this.notes[i]._id == note._id) {
+                this.notes.splice(i, 1);
+            }
+        }
     }
 
 }

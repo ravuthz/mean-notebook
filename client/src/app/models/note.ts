@@ -1,8 +1,9 @@
 export class Note {
+    // public _id: string;
     constructor(
-        public book: String,
-        public author: String,
-        public title: String,
-        public content: String
+        public book: string,
+        public author: string,
+        public title: string,
+        public content: string
     ) {}
 }

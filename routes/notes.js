@@ -40,6 +40,7 @@ router.get('/notes', function(req, res, next) {
 // create new note
 router.post('/notes', function(req, res, next) {
     var note = req.body;
+    console.log('server req.body: ', note);
     if (!note.title || !note.author || !note.book) {
         res.status(400);
         res.json({
