@@ -37,6 +37,25 @@ Create & Connect to mongodb
 
 Create & Code client with AngularJs v2
 
+# Fix
+Cannot read property 'listLazyRoutes' of undefined
+on angular-cli v1.0.0-beta.22-1
 
+Remove global angular-cli
+```
+sudo rm -rf /usr/local/lib/node_modules/angular-cli
+
+npm uninstall -g angular-cli
+npm cache clean
+npm install -g angular-cli@latest
+```
+
+Remove local node_modules folder
+```
+sudo rm -rf node_modules dist tmp
+npm install --save-dev angular-cli@latest
+npm install
+ng init
+```
     
 

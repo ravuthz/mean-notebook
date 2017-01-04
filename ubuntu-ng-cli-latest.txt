@@ -1,0 +1,29 @@
+ravuthz@dell:~/projects/mean/mean-notebook/client$ npm install --save-dev angular-cli@latest
+npm WARN deprecated minimatch@2.0.10: Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue
+npm WARN prefer global node-gyp@3.4.0 should be installed with -g
+
+> node-sass@3.13.1 install /home/ravuthz/projects/mean/mean-notebook/client/node_modules/node-sass
+> node scripts/install.js
+
+Downloading binary from https://github.com/sass/node-sass/releases/download/v3.13.1/linux-x64-46_binding.node
+Download complete  ] - :
+Binary saved to /home/ravuthz/projects/mean/mean-notebook/client/node_modules/node-sass/vendor/linux-x64-46/binding.node
+Caching binary to /home/ravuthz/.npm/node-sass/3.13.1/linux-x64-46_binding.node
+
+> node-sass@3.13.1 postinstall /home/ravuthz/projects/mean/mean-notebook/client/node_modules/node-sass
+> node scripts/build.js
+
+Binary found at /home/ravuthz/projects/mean/mean-notebook/client/node_modules/node-sass/vendor/linux-x64-46/binding.node
+Testing binary
+Binary is fine
+client@0.0.0 /home/ravuthz/projects/mean/mean-notebook/client
+
+...
+
+npm WARN optional Skipping failed optional dependency /chokidar/fsevents:
+npm WARN notsup Not compatible with your operating system or architecture: fsevents@1.0.15
+npm WARN @angular/core@2.4.1 requires a peer of rxjs@^5.0.1 but none was installed.
+npm WARN @ngtools/webpack@1.2.1 requires a peer of @angular/compiler@^2.3.1 but none was installed.
+npm WARN @ngtools/webpack@1.2.1 requires a peer of @angular/core@^2.3.1 but none was installed.
+npm WARN @angular/compiler-cli@2.4.1 requires a peer of @angular/compiler@2.4.1 but none was installed.
+npm WARN @angular/compiler-cli@2.4.1 requires a peer of @angular/core@2.4.1 but none was installed.
