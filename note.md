@@ -57,5 +57,10 @@ npm install --save-dev angular-cli@latest
 npm install
 ng init
 ```
+
+# Create Focus Directive
+```
+ng g directive focus
+```
     
 

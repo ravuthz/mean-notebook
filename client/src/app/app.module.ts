@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { NotesComponent } from './notes/notes.component';
 
 import { NoteService } from './services/note.service';
+import { FocusDirective } from './focus.directive';
 
 @NgModule({
     declarations: [
         AppComponent,
-        NotesComponent
+        NotesComponent,
+        FocusDirective
     ],
     imports: [
         BrowserModule,
