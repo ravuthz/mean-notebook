@@ -17,7 +17,6 @@ export class NotesComponent implements OnInit {
 
     error: string;
     isModify: boolean = false;
-    // showOption: boolean = false;
 
     constructor(private noteService: NoteService) {}
 
@@ -77,7 +76,7 @@ export class NotesComponent implements OnInit {
         };
 
         this.noteService.create(newNote).then(
-            res => this.appendNotes(newNote),
+            res => this.insertLocalNote(newNote),
             err => this.error = <any>err
         );
 
@@ -89,7 +88,7 @@ export class NotesComponent implements OnInit {
 
     deleteNote(note) {
         this.noteService.delete(note._id).then(
-            res => this.refreshNotes(note),
+            res => this.deleteLocalNote(note),
             err => this.error = <any>err
         );
 
@@ -101,8 +100,8 @@ export class NotesComponent implements OnInit {
 
     updateNote(note) {
         this.noteService.update(note._id, note).then(
-            res => this.updateNotes(note),
-            err => this.error = <any>err
+            res => this.updateLocalNote(note),
+            err => this.showErrorMessage(err)
         );
 
         // this.noteService.updateNote(note._id, note).subscribe(
@@ -128,12 +127,22 @@ export class NotesComponent implements OnInit {
         this.isModify = false;
     }
 
-    appendNotes(note) {
+    showErrorMessage(err) {
+        this.error = err;
+        console.log(err);
+    }
+
+    /**
+     * These action crud on view with client side
+     * don't reload the data just crud on current notes
+     */
+
+    insertLocalNote(note) {
         this.notes.push(note);
         this.blankNote();
     }
 
-    updateNotes(note) {
+    updateLocalNote(note) {
         for  (let i=0; i<this.notes.length; i++) {
             if (this.notes[i]._id == note._id) {
                 this.notes[i] = note;
@@ -142,7 +151,7 @@ export class NotesComponent implements OnInit {
         this.blankNote();
     }
 
-    refreshNotes(note) {
+    deleteLocalNote(note) {
         for (let i=0; i<this.notes.length; i++) {
             if (this.notes[i]._id == note._id) {
                 this.notes.splice(i, 1);

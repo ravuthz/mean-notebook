@@ -1,18 +1,6 @@
 <div class="row">
-    <div class="well">
+    <div class="col-sm-4 well">
         <form (submit)="createNote($event)" method="POST">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <input class="form-control" type="text" name="book" [(ngModel)]="book" placeholder="Note's book">
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <input class="form-control" type="text" name="author" [(ngModel)]="author" placeholder="Note's author">
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
@@ -27,6 +15,20 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="author" [(ngModel)]="author" placeholder="Note's author">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="book" [(ngModel)]="book" placeholder="Note's book">
+                    </div>
+                </div>
+            </div>
             <button type="submit" class="btn btn-sm btn-primary">
                 {{ isModify ? 'Update The Note' : 'Create New Note' }}
             </button>
@@ -34,6 +36,34 @@
                 Cancel or Reset form
             </button>
         </form>
+    </div>
+
+    <div class="col-sm-8">
+        <div class="responsive-table">
+            <table class="table table-bordered">
+                <tr>
+                    <th>No</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Book Name</th>
+                    <th>Action</th>
+                </tr>
+                <tr *ngFor="let note of notes; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ note.title }}</td>
+                    <td>{{ note.author }}</td>
+                    <td>{{ note.book }}</td>
+                    <td>
+                        <button (click)="modifyNote(note)" class="btn btn-sm btn-primary">
+                            MODIFY
+                        </button>
+                        <button (click)="deleteNote(note)" class="btn btn-sm btn-danger">
+                            DELETE
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -68,30 +98,5 @@
                 <hr/>
             </li>
         </ul>
-    </div>
-</div>
-
-<div class="row note-list">
-    <div *ngFor="let note of notes">
-        <div class="col-sm-1">
-            <input type="checkbox">
-        </div>
-        <div class="col-sm-2">
-            {{ note.book }}
-        </div>
-        <div class="col-sm-5">
-            {{ note.title }}
-        </div>
-        <div class="col-sm-2">
-            {{ note.author }}
-        </div>
-        <div class="col-sm-2">
-            <button (click)="modifyNote(note)" class="btn btn-sm btn-primary">
-                MODIFY
-            </button>
-            <button (click)="deleteNote(note)" class="btn btn-sm btn-danger">
-                DELETE
-            </button>
-        </div>
     </div>
 </div>
